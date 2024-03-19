@@ -4,17 +4,33 @@
     <head>
         <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </head>
-    <body>
-        {% if request.user.is_authenticated %}
+    <nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'posts:feed' %}">
+      <img src="{% static 'users/images/logo.png' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      <span>SnapVibe</span>
+    </a>
+     {% if request.user.is_authenticated %}
+        <a class="navbar-brand" href="{% url 'posts:create' %}">
+      
+      <span>Create Post</span>
+      </a>
+      <a href="{% url 'edit' %}">{{user.username}}</a>
+    
         <a href="{% url 'logout' %}">Logout</a>
+        
         {% else %}
         <a href="{% url 'login' %}">Login</a>
         {% endif %}
         
+       
+  </div>
+</nav>
+    </head>
+    <body>
         {% block body %}
         {% endblock %}
     </body>

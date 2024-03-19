@@ -1,9 +1,30 @@
 {% extends 'users/base.html' %}
+{% load static %}
+
 {% block body %}
-<h1>Homepage for users app</h1>
+<div class="container">
+<h1>My Posts</h1>
+</div>
+<div class="container" style="justify-content: center; align-items: center; ">
 {% for post in posts%}
-<h1>{{post.title}}</h1>
-<h3>{{post.user}}</h3>
-<div class="container"><img src="{{post.image.url}}"></div>
+
+<div class="card" style="width: 50rem;">
+  <div class="card-header">
+    <img src="{{profile.photo.url}}" style="border-radius: 50%; height: 50px;  width: 50px;">  
+    {{post.user}}
+  </div>    
+  <img src="{{post.image.url}}" class="card-img-top" alt="post">
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.caption}}</p>
+    
+  </div>
+  <div class="card-footer">
+    <img src="{% static 'users/images/unlike.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+     <img src="{% static 'users/images/comment.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+  </div>
+</div>
+
 {% endfor %}
+</div>
 {% endblock %}
