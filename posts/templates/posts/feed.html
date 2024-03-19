@@ -3,7 +3,7 @@
 
 {% block body %}
 <div class="container">
-<h1>My Posts</h1>
+<h1>Feeds</h1>
 </div>
 <div class="container" style="justify-content: center; align-items: center; ">
 {% for post in posts%}
@@ -35,8 +35,7 @@
     <img src="{% static 'users/images/unlike.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
     </a>
     {% endif %}
-    
-    <img src="{% static 'users/images/comment.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+     
   <div>
       {% if post.liked_by.count < 1 %}
       {% elif post.liked_by.count == 1 %}
@@ -44,6 +43,25 @@
       {% elif post.liked_by.count > 1 %}
       {{ post.liked_by.first }} & {{post.liked_by.count  }} Likes this
       {% endif %}
+  </div>
+  <div class="container" style="background-color: white; padding: 10px; margin: 20px; width: 700px">
+    {% for comment in post.comment.all %}
+    <b>{{ comment.posted_by}}</b>: {{comment.body}}
+    {% endfor %} 
+  </div>
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      <div>Add comment</div>
+      <div>{{comment_form.body}}</div>
+      <div>
+        <input type="hidden" name="post_id", id="post_id" value="{{post.id}}">
+        <input type="hidden" name="posted_by", id="posted_by" value="{{logged_user}}">
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
   </div>
   </div>
 </div>

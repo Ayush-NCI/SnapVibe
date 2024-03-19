@@ -10,7 +10,11 @@
 
 <div class="card" style="width: 50rem;">
   <div class="card-header">
-    <img src="{{profile.photo.url}}" style="border-radius: 50%; height: 50px;  width: 50px;">  
+    {% if post.user.profile.photo.url is not none %}
+    <img src="{{post.user.profile.photo.url}}" alt="" style="border-radius: 50%; height: 50px;  width: 50px;">  
+    {% else %}
+    <img src="{% static 'users/images/default_profile.png' %}" alt="" style="border-radius: 50%; height: 50px;  width: 50px;">  
+    {% endif %}
     {{post.user}}
   </div>    
   <img src="{{post.image.url}}" class="card-img-top" alt="post">
@@ -20,11 +24,61 @@
     
   </div>
   <div class="card-footer">
+    
+    {% if logged_user in post.liked_by.all %}
+    <a id="{{post.id}}" class="btn-like">
+    <img src="{% static 'users/images/like.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+    </a>
+    {% else %}
+    <a id="{{post.id}}" class="btn-like">
     <img src="{% static 'users/images/unlike.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
-     <img src="{% static 'users/images/comment.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+    </a>
+    {% endif %}
+    
+    <img src="{% static 'users/images/comment.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+     
+  <div>
+      {% if post.liked_by.count < 1 %}
+      {% elif post.liked_by.count == 1 %}
+      {{post.liked_by.first }} Likes this
+      {% elif post.liked_by.count > 1 %}
+      {{ post.liked_by.first }} & {{post.liked_by.count  }} Likes this
+      {% endif %}
+  </div>
+  <div class="container" style="background-color: white; padding: 10px; margin: 20px; width: 700px">
+    {% for comment in post.comment.all %}
+    <b>{{ comment.posted_by}}</b>: {{comment.body}}
+    {% endfor %} 
+  </div>
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      <div>Add comment</div>
+      <div>{{comment_form.body}}</div>
+      <div>
+        <input type="hidden" name="post_id", id="post_id" value="{{post.id}}">
+        <input type="hidden" name="posted_by", id="posted_by" value="{{logged_user}}">
+      </div>
+      <div>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  </div>
   </div>
 </div>
-
 {% endfor %}
+<script type="text/javascript">
+    window.CSRF_TOKEN="{{ csrf_token }}"
+    $(document).on('click','.btn-like',function(){
+        var post_id=this.id
+        $.ajax({
+            method:"POST",
+            url:'/posts/like',
+            data:{post_id:post_id, csrfmiddlewaretoken:window.CSRF_TOKEN}
+        })
+        window.location.href=""
+    })
+</script>
+
 </div>
 {% endblock %}
