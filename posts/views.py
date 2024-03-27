@@ -40,3 +40,11 @@ def like_post(request):
     else:
         post.liked_by.add(request.user)
     return redirect('feed')    
+    
+def post_delete(request, id):
+    print(id)
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('index')
+    return render(request, 'posts/post_confirm_delete.html', {'post': post})    

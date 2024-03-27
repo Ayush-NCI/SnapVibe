@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container  mt-5" style=" width: 100%;
+    max-width: 600px; /* Adjust the width as needed */
+    text-align: center; ">
+  <div class="content" style=" background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px; ">
+    <h5>Are you sure you want to delete "{{ post.title }}"?</h5>
+<form method="post">
+  {% csrf_token %}
+
+<button type="submit" class="btn btn-danger">Delete</button>
+
+
+<a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+  
+</form>
+</div>
+</div>
+{% endblock %}

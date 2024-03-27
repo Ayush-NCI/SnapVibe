@@ -21,7 +21,9 @@
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.caption}}</p>
-    
+    <a href="{% url 'posts:delete' post.id %}">
+    <button class="btn btn-danger">Delete</button>
+</a>
   </div>
   <div class="card-footer">
     
@@ -35,7 +37,6 @@
     </a>
     {% endif %}
     
-    <img src="{% static 'users/images/comment.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
      
   <div>
       {% if post.liked_by.count < 1 %}
@@ -51,18 +52,10 @@
     {% endfor %} 
   </div>
   <div>
-    <form method="post">
-      {% csrf_token %}
-      <div>Add comment</div>
-      <div>{{comment_form.body}}</div>
       <div>
         <input type="hidden" name="post_id", id="post_id" value="{{post.id}}">
         <input type="hidden" name="posted_by", id="posted_by" value="{{logged_user}}">
       </div>
-      <div>
-        <button type="submit">Add</button>
-      </div>
-    </form>
   </div>
   </div>
 </div>

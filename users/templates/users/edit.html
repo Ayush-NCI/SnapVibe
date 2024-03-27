@@ -1,11 +1,14 @@
 {% extends 'users/base.html' %}
 {% block body %}
-<h2>Edit Profile form</h2>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{user_form.as_p}}
-        {{profile_form.as_p}}
-        <input type="submit">
-    </form>
-
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="content bg-light p-4 rounded">
+        <h2 class="text-center mb-4">Edit Profile form</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
+        </form>
+    </div>
+</div>
 {% endblock %}    
