@@ -1,13 +1,26 @@
+{% extends 'users/outer_base.html' %}
+{% load static %}
 
 {% block body %}
-<h3>User Registration</h3>
-<div class="container">
-   <div class="mb-3 mt-4">
-    <form method="POST">
-        {% csrf_token %}
-        {{user_form.as_p}}
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-5" >User Registration</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{user_form.as_p}}
+                        <button type="submit" class="btn btn-success btn-block mt-4 mb-5">Register</button>
+                        <div class="mb-3">
+                            <p><a href="{% url 'login' %}">Click here to login.</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>   
+</div>
+
 {% endblock %}    

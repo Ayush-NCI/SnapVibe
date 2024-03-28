@@ -1,24 +1,30 @@
+{% extends 'users/outer_base.html' %}
+{% load static %}
 
 {% block body %}
 
-<div class="mb-3 mt-2">
-<h3>Login User</h3>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-5" >Login</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary btn-block mt-4 mb-5">Login</button>
+                        <div class="mb-3">
+                            <p><a href="{% url 'password_reset' %}">Forgot Password? Click here to reset.</a></p>
+                        </div>
+                        <div class="mb-3">
+                            <p><a href="{% url 'register' %}">Dont have an account? Click here to register.</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="container">
-    
-        <form method="POST">
-        <div class="mb-3 mt-5">    
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button type="submit" class="btn btn-success">Login</button>
-        </div> 
-        <div class="mb-3">
-            <p><a href="{% url 'password_reset' %}">Forgot Password? Click here to reset.</a></p>
-        </div>  
-         <div class="mb-3">
-            <p><a href="{% url 'register' %}">Dont have an account? Click here to register.</a></p>
-        </div> 
-        </form>
-       
-</div>        
+
+
 {% endblock %}

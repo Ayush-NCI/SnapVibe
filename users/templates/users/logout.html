@@ -1,2 +1,7 @@
+{% extends 'users/outer_base.html' %}
+{% load static %}
+
+{% block body %}
 <h1>You have been logged out</h1>
 <a href="{%url 'login'%}">Login</a>
+{% endblock %}

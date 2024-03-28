@@ -13,6 +13,7 @@ def post_create(request):
             new_item= form.save(commit=False)
             new_item.user=request.user
             new_item.save()
+            return redirect('posts:feed')
     else:
         form =PostCreateForm(data=request.GET)
     return render(request,'posts/create.html',{'form':form})    
@@ -28,7 +29,7 @@ def feed(request):
         new_comment.save()
     else:
         comment_form=CommentForm()
-    posts=Post.objects.all()
+    posts=Post.objects.all().order_by('-created')
     logged_user=request.user
     return render(request,'posts/feed.html',{'posts':posts, 'logged_user':logged_user, 'comment_form':comment_form})
 
