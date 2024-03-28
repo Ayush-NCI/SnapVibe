@@ -1,6 +1,3 @@
-""" A file automatically created in each Django project. """
-#!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
 import os
 import sys
 
