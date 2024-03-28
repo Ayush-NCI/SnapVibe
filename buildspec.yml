@@ -11,10 +11,9 @@ phases:
   pre_build:
     commands:
       - python --version
-      - pylint --disable=C0415,C0413,W0105 $CODEBUILD_SRC_DIR/*.py
       - pylint $CODEBUILD_SRC_DIR/*.py
       - pylint $CODEBUILD_SRC_DIR/snapVibe/*.py
-      
+      - pylint --disable=C *.py **/*.py
     
 
 artifacts:
