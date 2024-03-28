@@ -1,6 +1,7 @@
+""" A file automatically created in each Django project. """
 import os
 import sys
-""" A file automatically created in each Django project. """
+
 
 def main():
     """Run administrative tasks."""
