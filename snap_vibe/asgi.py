@@ -1,5 +1,5 @@
 """
-ASGI config for snapVibe project.
+ASGI config for snap_vibe project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'snapVibe.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'snap_vibe.settings')
 
 application = get_asgi_application()
