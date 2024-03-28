@@ -16,7 +16,6 @@ def userLogin(request):
             if user is not None:
                 login(request,user)
                 return redirect(reverse('posts:feed'))
-                
             else:
                 return HttpResponse("Invalid credentials")
     else:            
