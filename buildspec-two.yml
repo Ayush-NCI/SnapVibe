@@ -3,24 +3,19 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.11
+      java: corretto17
   pre_build:
     commands:
-      - echo "Installing dependencies"
-      - pip install -r requirements.txt
+      - export SONAR_SCANNER_VERSION=5.0.1.3006
+      - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+      - curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+      - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+      - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+      - export SONAR_SCANNER_OPTS="-server"
   build:
     commands:
-      - echo "Running tests"
-      - python manage.py test
-  post_build:
-    commands:
-      - echo "Build completed successfully"
-
-artifacts:
-  files:
-    - '**/*'
-  discard-paths: yes
-
-cache:
-  paths:
-    - '/root/.cache/pip'
+      - set -e
+      - sonar-scanner -X -Dsonar.login=192e262079ff549ee124656c71c70fca1199cbb6 -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=x23186925_devops_proj_final -Dsonar.organization=x23186925 -DgeneratePom=true
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=x23186925_devops_proj_final >result.json
+      - cat result.json
