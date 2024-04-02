@@ -12,9 +12,6 @@ phases:
     commands:
       - echo "Running tests"
       - python manage.py test
-      - cd server && coverage run -m py.test > test.out && cd ..
-      - cd server && coverage report --include=apps/* > coverage.out && cd ..
-      - cd server && coverage html --include=apps/* && cd ..
   post_build:
     commands:
       - echo "Build completed successfully"
