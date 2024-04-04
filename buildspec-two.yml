@@ -14,7 +14,11 @@ phases:
       - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
       - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
       - export SONAR_SCANNER_OPTS="-server"
-      - export SONAR_SCANNER_OPTS="-Xms128m -Xmx512m"
+      - export SONAR_SCANNER_OPTS="-Xmx1024m -Xms512m"
+      - export MAVEN_OPTS="-Xmx512m"
+      - ANT_OPTS="-Xms512m -Xmx1800m"
+      - export SONAR_RUNNER_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
+      
   build:
     commands:
       - set -e
