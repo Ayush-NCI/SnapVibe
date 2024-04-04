@@ -11,14 +11,17 @@ class Post(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     liked_by=models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='posts_liked',blank=True)
     
+    objects = models.Manager()
+    
     def __str__(self):
         return self.title
     
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.title)
-        super().save(*args,**kwargs)    
+        super().save(*args,**kwargs)  
         
+       
     
 class Comment(models.Model):
     post=models.ForeignKey(Post, on_delete=models.CASCADE,related_name='comment')
@@ -30,3 +33,4 @@ class Comment(models.Model):
         
     def __str__(self):
         return self.body
+        

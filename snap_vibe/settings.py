@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r=8$90v*_zf(6cr*84mka@^fv)(x&40r(b*l+no=5i#+)0a#0h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['2abc1527f5cb4bf4844a1d556b0e92c5.vfs.cloud9.eu-west-1.amazonaws.com',
+ALLOWED_HOSTS = ['931d5a91b91d4ed49b2e86a8d332bedb.vfs.cloud9.eu-west-1.amazonaws.com',
 'demosnapvibe-env.eba-xn6fmsnz.eu-west-2.elasticbeanstalk.com']
 
 
