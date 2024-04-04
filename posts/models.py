@@ -43,6 +43,7 @@ class Comment(models.Model):
     body=models.CharField(max_length=200)
     created=models.DateTimeField(auto_now=True)
     posted_by=models.CharField(max_length=200)
+    objects = models.Manager()
     class Meta:
         """
         Metadata for the Comment.
