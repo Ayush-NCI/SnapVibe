@@ -1,8 +1,11 @@
-from django.urls import path, include
+"""
+Module containing urls for the users app.
+"""
+from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_view
 
-app_name = 'posts'
+APP_NAME = 'POSTS'
+
 urlpatterns = [
     path('create', views.post_create, name='create'),
     path('feed', views.feed, name='feed'),

@@ -1,8 +1,14 @@
+"""
+Module containing models for the Post app.
+"""
 from django.db import models
 from django.utils.text import slugify
 from django.conf import settings
 # Create your models here.
 class Post(models.Model):
+    """
+    Model representing Post information.
+    """
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image=models.ImageField(upload_to='images/%y/%m/%d')
     caption=models.TextField(blank=True)
@@ -14,9 +20,15 @@ class Post(models.Model):
     objects = models.Manager()
     
     def __str__(self):
-        return self.title
+        """
+        Return a string representation of the Post.
+        """
+        return str(self.title)
     
     def save(self,*args,**kwargs):
+        """
+        Saves slug for the post.
+        """
         if not self.slug:
             self.slug=slugify(self.title)
         super().save(*args,**kwargs)  
@@ -24,13 +36,24 @@ class Post(models.Model):
        
     
 class Comment(models.Model):
+    """
+    Model representing comment information.
+    """
     post=models.ForeignKey(Post, on_delete=models.CASCADE,related_name='comment')
     body=models.CharField(max_length=200)
     created=models.DateTimeField(auto_now=True)
     posted_by=models.CharField(max_length=200)
     class Meta:
+        """
+        Metadata for the Comment.
+
+        Specifies the associated Comment in order of created timestamp.
+        """
         ordering=('created',)
         
     def __str__(self):
-        return self.body
+        """
+        Return a string representation of the Comment.
+        """
+        return str(self.body)
         
