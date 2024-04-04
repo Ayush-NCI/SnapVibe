@@ -8,7 +8,7 @@ phases:
     commands:
       - export SONAR_SCANNER_VERSION=5.0.1.3006
       - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
-      - export SONAR_SCANNER_OPTS="-Xmx8G -server"
+      - export SONAR_SCANNER_OPTS="-Xmx512m -server "
       - |
         if [ ! -d "$SONAR_SCANNER_HOME" ]; then
           curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
