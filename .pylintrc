@@ -1,0 +1,2 @@
+[MASTER]
+disable=pointless-statement,trailing-whitespace,too-few-public-methods
