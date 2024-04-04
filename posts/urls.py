@@ -4,7 +4,7 @@ Module containing urls for the users app.
 from django.urls import path
 from . import views
 
-APP_NAME = 'POSTS'
+app_name = 'posts'
 
 urlpatterns = [
     path('create', views.post_create, name='create'),

@@ -20,10 +20,10 @@ def post_create(request):
             new_item= form.save(commit=False)
             new_item.user=request.user
             new_item.save()
-            return redirect('POSTS:feed')
+            return redirect('posts:feed')
     else:
         form =PostCreateForm(data=request.GET)
-    return render(request,'POSTS/create.html',{'form':form})    
+    return render(request,'posts/create.html',{'form':form})    
     
 
 def feed(request):
@@ -41,7 +41,7 @@ def feed(request):
         comment_form=CommentForm()
     posts=Post.objects.all().order_by('-created')
     logged_user=request.user
-    return render(request,'POSTS/feed.html',{'posts':posts,
+    return render(request,'posts/feed.html',{'posts':posts,
     'logged_user':logged_user, 'comment_form':comment_form})
 
 def like_post(request):
@@ -64,5 +64,5 @@ def post_delete(request, user_id):
     if request.method == 'POST':
         post.delete()
         return redirect('index')
-    return render(request, 'POSTS/post_confirm_delete.html', {'post': post})    
+    return render(request, 'posts/post_confirm_delete.html', {'post': post})    
     
