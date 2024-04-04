@@ -12,7 +12,7 @@ phases:
     commands:
       - python --version
       - pylint $CODEBUILD_SRC_DIR/*.py
-      - pylint $CODEBUILD_SRC_DIR/snap_vibe/*.py
+      - pylint $CODEBUILD_SRC_DIR/SnapVibe/*.py
 artifacts:
   files:
     - '**/*'
