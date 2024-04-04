@@ -3,17 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17
+      java: corretto21
   pre_build:
     commands:
-      - export SONAR_SCANNER_VERSION=5.0.1.3006
-      - export SONAR_RUNNER_VERSION=4.6.0.2311
-      - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
-      - curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
-      - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
-      - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-      - export SONAR_SCANNER_OPTS="-server"
-      - export SONAR_RUNNER_OPTS="-Xmx3062m -XX:MaxPermSize=512m -XX:ReservedCodeCacheSize=128m"
+      - apt-get update
+      - apt-get install -y jq
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+      - unzip ./sonar-scanner-cli-5.0.1.3006-linux.zip
+      - export PATH=$PATH:/sonar-scanner-5.0.1.3006-linux/bin/
       
   build:
     commands:
@@ -22,3 +19,4 @@ phases:
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=Ayush-NCI_SnapVibe >result.json
       - cat result.json
+      - - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
