@@ -3,6 +3,7 @@ Module containing views for the users app.
 """
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -11,6 +12,7 @@ from .models import Profile
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 # Create your views here.
+@csrf_protect
 def user_login(request):
     """
     View function for user login.
