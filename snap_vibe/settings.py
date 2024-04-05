@@ -53,7 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'snap_vibe.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://931d5a91b91d4ed49b2e86a8d332bedb.vfs.cloud9.eu-west-1.amazonaws.com']
+CSRF_TRUSTED_ORIGINS = [
+'https://931d5a91b91d4ed49b2e86a8d332bedb.vfs.cloud9.eu-west-1.amazonaws.com']
 
 TEMPLATES = [
     {
