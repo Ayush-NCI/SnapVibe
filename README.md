@@ -2,16 +2,16 @@
 SnapVibe is a Django web application that allows users to share images, add captions, and interact with posts from other users through likes and comments.
 
 # Features: 
-User Authentication: Users can sign up, log in, and log out securely.
-Image Posting: Users can upload images and add captions to accompany their posts.
-Explore Posts: Users can view posts from other users and discover new content.
-Like and Comment: Users can express appreciation for posts by liking them and leaving comments.
+- User Authentication: Users can sign up, log in, and log out securely.
+- Image Posting: Users can upload images and add captions to accompany their posts.
+- Explore Posts: Users can view posts from other users and discover new content.
+- Like and Comment: Users can express appreciation for posts by liking them and leaving comments.
 
 # Technologies Used
-Django: Python web framework for building the backend.
-HTML/CSS: Frontend design and layout.
-SQLite: Database for storing user information and post data.
-Bootstrap: Frontend framework for responsive design.
+- Django: Python web framework for building the backend.
+- HTML/CSS: Frontend design and layout.
+- SQLite: Database for storing user information and post data.
+- Bootstrap: Frontend framework for responsive design.
 
 # Installation
 
@@ -42,10 +42,10 @@ python manage.py runserver
 Open your web browser and visit http://127.0.0.1:8000 to access SnapVibe.
 
 # Usage
-Register for a new account or log in if you already have one.
-Once logged in, you can upload images and add captions to create posts.
-Explore posts from other users and interact with them by liking or leaving comments.
-Log out when you're done.
+- Register for a new account or log in if you already have one.
+- Once logged in, you can upload images and add captions to create posts.
+- Explore posts from other users and interact with them by liking or leaving comments.
+- Log out when you're done.
 
 # Admin Login
 
