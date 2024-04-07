@@ -10,19 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import json
 from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
-import json
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config("SECRET_KEY")
-SONAR_LOGIN_TOKEN = config('SONAR_LOGIN_TOKEN')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
 def get_secret():
     """
     function to get secret from aws secret manager.
@@ -51,10 +49,9 @@ def get_secret():
     secret_dict = json.loads(secret)
     return secret_dict
 
-secret_dict =get_secret()    
+secret_dict1=get_secret()    
 # SECURITY WARNING: keep the secret key used in production secret!
-print(secret_dict)
-SECRET_KEY = secret_dict["django_secret_key"]
+SECRET_KEY = secret_dict1["django_secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
