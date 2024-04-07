@@ -3,7 +3,7 @@ Module containing views for the users app.
 """
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect,  require_POST
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -13,6 +13,7 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 
 # Create your views here.
 @csrf_protect
+@require_POST
 def user_login(request):
     """
     View function for user login.
@@ -30,7 +31,8 @@ def user_login(request):
         form = LoginForm()
     return render(request,'users/login.html',{'form':form})
 
-@login_required    
+@login_required  
+@require_POST
 def index(request):
     """
     View function for index page.
@@ -39,7 +41,8 @@ def index(request):
     posts=Post.objects.filter(user=current_user).order_by('-created')
     profile=Profile.objects.filter(user=current_user).first()
     return render(request, 'users/index.html',{'posts':posts, 'profile':profile})
-    
+
+@require_POST    
 def register(request):
     """
     View function for user registration.
