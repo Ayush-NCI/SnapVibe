@@ -23,7 +23,7 @@ phases:
   build:
     commands:
       - set -e
-      - $SONAR_SCANNER_HOME/bin/sonar-scanner -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=Ayush-NCI_SnapVibe -Dsonar.organization=ayush-nci -DgeneratePom=true
+      - $SONAR_SCANNER_HOME/bin/sonar-scanner -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=Ayush-NCI_SnapVibe -Dsonar.organization=ayush-nci -DgeneratePom=true -Dsonar.exclusions=env/**/*
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=Ayush-NCI_SnapVibe >result.json
       - cat result.json
