@@ -24,7 +24,9 @@ SONAR_LOGIN_TOKEN = config('SONAR_LOGIN_TOKEN')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 def get_secret():
-
+    """
+    function to get secret from aws secret manager.
+    """
     secret_name = "x23178248-SnapVibe"
     region_name = "eu-west-1"
 
