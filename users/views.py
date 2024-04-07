@@ -3,7 +3,8 @@ Module containing views for the users app.
 """
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect,  require_POST
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
