@@ -14,10 +14,15 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 import json
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config("SECRET_KEY")
+SONAR_LOGIN_TOKEN = config('SONAR_LOGIN_TOKEN')
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 def get_secret():
 
     secret_name = "x23178248-SnapVibe"
@@ -42,17 +47,12 @@ def get_secret():
     secret = get_secret_value_response['SecretString']
     # Convert the secret string to a dictionary
     secret_dict = json.loads(secret)
-    print(secret_dict)
     return secret_dict
 
-secret_dict = get_secret()
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
+secret_dict =get_secret()    
 # SECURITY WARNING: keep the secret key used in production secret!
+print(secret_dict)
 SECRET_KEY = secret_dict["django_secret_key"]
-SONAR_LOGIN_TOKEN = os.environ.get('SONAR_LOGIN_TOKEN', secret_dict["sonar_login_token"])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
