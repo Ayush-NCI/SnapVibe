@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 import json
+import logging
 from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
@@ -42,6 +43,7 @@ def get_secret():
     except ClientError as e:
         # For a list of exceptions thrown, see
         # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        logging.exception('error while accessing the dict')
         raise e
 
     secret = get_secret_value_response['SecretString']

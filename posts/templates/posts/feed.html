@@ -28,11 +28,11 @@
     
     {% if logged_user in post.liked_by.all %}
     <a id="{{post.id}}" class="btn-like">
-    <img src="{% static 'users/images/like.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+    <img src="{% static 'users/images/like.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;" alt="like">
     </a>
     {% else %}
     <a id="{{post.id}}" class="btn-like">
-    <img src="{% static 'users/images/unlike.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;">
+    <img src="{% static 'users/images/unlike.png' %}" style="border-radius: 50%; height: 50px;  width: 50px;" alt="unlike">
     </a>
     {% endif %}
      
