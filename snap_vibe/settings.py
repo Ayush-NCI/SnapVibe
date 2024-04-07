@@ -11,17 +11,48 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import boto3
+from botocore.exceptions import ClientError
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def get_secret():
+
+    secret_name = "x23178248-SnapVibe"
+    region_name = "eu-west-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    secret = get_secret_value_response['SecretString']
+    # Convert the secret string to a dictionary
+    secret_dict = json.loads(secret)
+    print(secret_dict)
+    return secret_dict
+
+secret_dict = get_secret()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r=8$90v*_zf(6cr*84mka@^fv)(x&40r(b*l+no=5i#+)0a#0h'
-
+SECRET_KEY = secret_dict["django_secret_key"]
+SONAR_LOGIN_TOKEN = os.environ.get('SONAR_LOGIN_TOKEN', secret_dict["sonar_login_token"])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
