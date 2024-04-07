@@ -2,7 +2,6 @@
 Module containing views for the users app.
 """
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST, require_GET, require_safe
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from .models import Post
@@ -11,7 +10,6 @@ from .forms import PostCreateForm, CommentForm
 # Create your views here.
 
 @login_required
-@require_POST
 def post_create(request):
     """
     View function for creating posts.
@@ -27,7 +25,6 @@ def post_create(request):
         form =PostCreateForm(data=request.GET)
     return render(request,'posts/create.html',{'form':form})    
     
-@require_GET
 def feed(request):
     """
     View function for viewing all posts.
@@ -46,7 +43,6 @@ def feed(request):
     return render(request,'posts/feed.html',{'posts':posts,
     'logged_user':logged_user, 'comment_form':comment_form})
 
-@require_safe
 def like_post(request):
     """
     View function for liking the posts.
@@ -59,7 +55,6 @@ def like_post(request):
         post.liked_by.add(request.user)
     return redirect('feed')    
 
-@require_safe    
 def post_delete(request, user_id):
     """
     View function for deleting the posts.
