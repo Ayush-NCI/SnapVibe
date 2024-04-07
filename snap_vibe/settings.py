@@ -13,8 +13,8 @@ import os
 import json
 import logging
 from pathlib import Path
-import boto3
-from botocore.exceptions import ClientError
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,38 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-def get_secret():
-    """
-    function to get secret from aws secret manager.
-    """
-    secret_name = "x23178248-SnapVibe"
-    region_name = "eu-west-1"
-
-    # Create a Secrets Manager client
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
-
-    try:
-        get_secret_value_response = client.get_secret_value(
-            SecretId=secret_name
-        )
-    except ClientError as e:
-        # For a list of exceptions thrown, see
-        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-        logging.exception('error while accessing the dict')
-        raise e
-
-    secret = get_secret_value_response['SecretString']
-    # Convert the secret string to a dictionary
-    secret_dict = json.loads(secret)
-    return secret_dict
-
-secret_dict1=get_secret()    
+ 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret_dict1["django_secret_key"]
+SECRET_KEY =  config("SECRET_KEY")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
