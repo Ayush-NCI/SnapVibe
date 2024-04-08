@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'posts'
+    'posts',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,15 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+AWS_STORAGE_BUCKET_NAME = 'snapvibe'
+AWS_S3_REGION_NAME = 'eu-west-1'  # e.g., 'us-east-1'
+
+# Static files (CSS, JavaScript, images)
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Media files (uploads)
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
