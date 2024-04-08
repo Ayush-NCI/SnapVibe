@@ -3,5 +3,5 @@
 
 {% block body %}
 <h1>You have been logged out</h1>
-<a href="{%url 'login'%}">Login</a>
+<button type="submit" class="btn btn-secondary btn-block btn-lg mt-4 mb-5" onclick="window.location.href='{% url 'login'%}'">Login</button>
 {% endblock %}

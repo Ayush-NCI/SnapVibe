@@ -7,33 +7,68 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- Latest compiled JavaScript -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation class to footer
+            document.querySelector('.footer').classList.add('animated');
+
+            // Add animation to cards while scrolling
+            window.addEventListener('scroll', function() {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3; // Adjust the division factor to control when the animation triggers
+
+                    if (cardPosition < screenPosition) {
+                        card.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            });
+        });
+    </script>
      <style>
         body {
-            background-image: url("{% static 'users/images/bg5.jpg' %}");
-            background-size: cover; /* Cover the entire viewport */
-            background-position: center; /* Center the background image */
-    
-            /* Add other background properties as needed */
+            background-image: url("{% static 'users/images/bg14.jpg' %}");
+            background-size: cover;
+            background-position: center;
         }
-        .card {
-        background-color: transparent;
-        border: none; /* Remove border if needed */
-    }
-    .login-link {
-        color: #007bff; /* Blue color */
-        text-decoration: none; /* Remove underline */
-        font-weight: bold; /* Make text bold */
-        transition: color 0.3s; /* Add transition effect */
-    }
 
-    .login-link:hover {
-        color: #0056b3; /* Darker blue color on hover */
-    }
+        .card {
+            background-color: transparent;
+            border: none;
+        }
+
+        .login-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .login-link:hover {
+            color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.7;
+            }
+        }
+
+        /* Apply fade-in animation to the footer */
+        .footer {
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
     </style>
     
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light" style="background-color: rgba(255, 255, 255, 0.1);">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'posts:feed' %}">
                 <img src="{% static 'users/images/logo.png' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -66,5 +101,34 @@
     
     {% endblock %}
 </body>
+<footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Connect With Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/in/ayush-jadhav-4749b1148/" class="text-white">LinkedIn</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Contact Information</h5>
+                <ul class="list-unstyled">
+                    <li>Email: jadhavayush2020@gmail.com.com</li>
+                    <li>Address: Dublin, Ireland</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center">© 2024 SnapVibe. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
 
 </html>
