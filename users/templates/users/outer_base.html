@@ -17,7 +17,28 @@
         </div>
     </nav>
 </head>
+<style>
+    body {
+        background-image: url("{% static 'users/images/bg.jpg' %}");
+        /* Add other background properties as needed */
+        background-size: cover; /* Cover the entire viewport */
+        
+    }
+    .card {
+        background-color: transparent;
+        border: none; /* Remove border if needed */
+    }
+    .login-link {
+        color: #007bff; /* Blue color */
+        text-decoration: none; /* Remove underline */
+        font-weight: bold; /* Make text bold */
+        transition: color 0.3s; /* Add transition effect */
+    }
 
+    .login-link:hover {
+        color: #0056b3; /* Darker blue color on hover */
+    }
+</style> 
 <body>
     {% block body %}
     {% endblock %}

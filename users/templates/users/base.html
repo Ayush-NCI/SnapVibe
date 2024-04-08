@@ -8,6 +8,31 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+     <style>
+        body {
+            background-image: url("{% static 'users/images/bg5.jpg' %}");
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+    
+            /* Add other background properties as needed */
+        }
+        .card {
+        background-color: transparent;
+        border: none; /* Remove border if needed */
+    }
+    .login-link {
+        color: #007bff; /* Blue color */
+        text-decoration: none; /* Remove underline */
+        font-weight: bold; /* Make text bold */
+        transition: color 0.3s; /* Add transition effect */
+    }
+
+    .login-link:hover {
+        color: #0056b3; /* Darker blue color on hover */
+    }
+    </style>
+    
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'posts:feed' %}">
@@ -38,6 +63,7 @@
 
 <body>
     {% block body %}
+    
     {% endblock %}
 </body>
 
